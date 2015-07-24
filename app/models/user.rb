@@ -8,16 +8,14 @@ class User < ActiveRecord::Base
 
   def self.login(email, password)
     user = find_by email: email
-    # returns either the user (if it finds the email address passed) or nil
-    user = user.authenticate password if user
-    # .authenticate is a method we get from has_secure_password
-    # if I have a user, authenticate the user with a password, return the user if the user is there. Return false if otherwise.
-    user.set_token && user.save! if user
-    user.token if user
-    # if I find a user, return the token.
+    user.login password if user
   end
 
-  # private
+  def login(password)
+    authenticate(password) && set_token && save! && token
+  end
+
+  private
 
   def set_token
     self.token = SecureRandom.hex
