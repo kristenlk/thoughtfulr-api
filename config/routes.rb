@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  post '/login' => 'users#login'
+  # maps to login in users controller
+
   resources :users, except: [:new, :edit]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

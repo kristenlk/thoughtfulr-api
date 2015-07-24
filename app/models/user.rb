@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
     user = find_by email: email
     user.login password if user
   end
+  # this allows me to type User.login in rails c
 
   def login(password)
     authenticate(password) && set_token && save! && token
