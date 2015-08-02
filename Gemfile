@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
+gem 'rack-cors', :require => 'rack/cors'
 
 gem 'rails', '4.2.3'
 
 gem 'rails-api'
 
 gem 'spring', :group => :development
-
 
 gem 'pg'
 
@@ -26,3 +26,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+group :development, :test do
+
+  gem 'hirb'
+
+end

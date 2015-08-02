@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_one :profile
+  has_many :messages, inverse_of: :user
+
   has_secure_password
 
   before_create :set_token

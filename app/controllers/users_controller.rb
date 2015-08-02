@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def login
     credentials = user_credentials
     token = User.login(credentials[:email], credentials[:password])
-    # if User.login works, there will be a token. If there is a token, render the token is json. If there is not, you're unauthorized.
+    # if User.login works, there will be a token. If there is a token, render the token as json. If there is not, you're unauthorized.
     if token
       render json: {token: token}
     else
