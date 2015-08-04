@@ -28,8 +28,10 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 gem 'pry', '~> 0.10.1'
 
+gem 'twilio-ruby', '~> 3.12'
+
 group :development, :test do
   gem 'byebug'
   gem 'hirb'
-
+  gem 'dotenv-rails'
 end

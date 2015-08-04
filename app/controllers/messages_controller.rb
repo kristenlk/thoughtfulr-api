@@ -1,11 +1,26 @@
 class MessagesController < ApplicationController
+
   def create
     message = current_user.messages.build(message_params)
     if message.save
       render json: message
+      # increment sent_message count in Profiles table by 1
     else
       render json: message.errors, status: :unprocessable_entity
     end
+  end
+
+  def delete
+
+  end
+
+
+  def list
+
+  end
+
+  def edit
+
   end
 
   def message_params

@@ -22,6 +22,8 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
+  # Configure rack to use twilio in development
+  # config.middleware.use Rack::TwilioWebhookAuthentication, ENV['TWILIO_AUTH_TOKEN_DEVELOPMENT'], '/voice'
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

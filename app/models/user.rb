@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_one :profile, inverse_of: :user, autosave: true
   has_many :messages, inverse_of: :user
+  has_many :received_messages, through: :messages
 
   has_secure_password
 
