@@ -37,13 +37,14 @@ class UsersController < ApplicationController
   # should be able to go to localhost:3000/users/create
   def create
     @user = User.new(register_params)
-    if @user.save
-      render json: @user, status: :created, location: @user
-      @profile = Profile.new(profile_params)
-      if @profile.save
-        render json: @profile, status: :created, location: @profile
+    @profile = Profile.new(profile_params)
+    @user.profile = @profile
+    if @user.save && @profile.save
+      #render json: @user, status: :created, location: @user
+      render json: @profile, status: :created
     else
-      render json: @user.errors, status: :unprocessable_entity
+      #render json: @user.errors, status: :unprocessable_entity
+      render json: @profile.errors, status: :unprocessable_entity
     end
   end
 
@@ -73,12 +74,12 @@ class UsersController < ApplicationController
     params.require(:credentials).permit(:email, :password)
   end
 
-  def register_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+  def profile_params
+    params.require(:profile).permit(:moniker, :location, :email_or_phone, :selected_time)
   end
 
-  def profile_params
-    params.require(:user).permit(:moniker, :location, :email_or_phone, :selected_time)
+  def register_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
     # def user_credentials
     #   params.require(:credentials).permit(:email, :password, :password_confirmation)
