@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_one :profile
+  has_one :profile, inverse_of: :user
   has_many :messages, inverse_of: :user
 
   has_secure_password
@@ -7,7 +7,17 @@ class User < ActiveRecord::Base
   before_create :set_token
   # When I call create, before it actually saves the object, the set_token method will be invoked. Which means the token will have been set.
 
-  validates :email, uniqueness: true
+  validates :email, presence: true,
+                    uniqueness: true,
+                    format: {
+                      with: /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
+                    }
+
+  before_save :downcase_email
+
+  def downcase_email
+    self.email = email.downcase
+  end
 
   def self.login(email, password)
     user = find_by email: email

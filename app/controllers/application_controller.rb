@@ -4,9 +4,9 @@ class ApplicationController < ActionController::API
 
   before_action :authenticate
 
-  attr_reader :current_user
-
   private
+
+  attr_reader :current_user
 
   # this is the "everything is protected" step
 

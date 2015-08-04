@@ -6,22 +6,24 @@ class UsersController < ApplicationController
 
   # POST /login
   def login
-    credentials = user_credentials
+    # credentials = user_credentials
+    credentials = login_params
+    # user = User.find_by email: credentials[:email]
     token = User.login(credentials[:email], credentials[:password])
     # if User.login works, there will be a token. If there is a token, render the token as json. If there is not, you're unauthorized.
     if token
-      render json: {token: token}
+      render json: User.find_by(token: token), serializer: UserLoginSerializer
     else
-      head :unauthorized
+      head :bad_request
     end
   end
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    # @users = User.all
 
-    render json: @users
+    # render json: @users
   end
 
   # GET /users/1
@@ -32,12 +34,14 @@ class UsersController < ApplicationController
 
   # POST /users
   # POST /users.json
+  # should be able to go to localhost:3000/users/create
   def create
-    # @user = User.new(user_params)
-    @user = User.new(user_credentials)
-
+    @user = User.new(register_params)
     if @user.save
       render json: @user, status: :created, location: @user
+      @profile = Profile.new(profile_params)
+      if @profile.save
+        render json: @profile, status: :created, location: @profile
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -65,9 +69,20 @@ class UsersController < ApplicationController
 
   private
 
-    def user_credentials
-      params.require(:credentials).permit(:email, :password, :password_confirmation)
-    end
+  def login_params
+    params.require(:credentials).permit(:email, :password)
+  end
+
+  def register_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def profile_params
+    params.require(:user).permit(:moniker, :location, :email_or_phone, :selected_time)
+  end
+    # def user_credentials
+    #   params.require(:credentials).permit(:email, :password, :password_confirmation)
+    # end
 
     # def set_user
     #   @user = User.find(params[:id])

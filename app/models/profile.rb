@@ -1,5 +1,5 @@
 class Profile < ActiveRecord::Base
-  belongs_to :user, inverse_of: :profiles
+  belongs_to :user, inverse_of: :profile
 
   validates_presence_of :moniker, :location, :email_or_phone, :selected_time
 
