@@ -37,16 +37,27 @@ class UsersController < ApplicationController
   # should be able to go to localhost:3000/users/create
   def create
     @user = User.new(register_params)
-    @profile = Profile.new(profile_params)
-    @user.profile = @profile
-    if @user.save && @profile.save
+    @user.profile = Profile.new(profile_params)
+    #@user.profile.build(profile_params)
+    # @user.profile = @profile
+    # credentials = login_params
+    # token = User.login(credentials[:email], credentials[:password])
+    if @user.save # && @profile.save # && token
       #render json: @user, status: :created, location: @user
-      render json: @profile, status: :created
+      render json: @user, status: :created, serializer: UserLoginSerializer
+      #render json: User.find_by(token: token), serializer: UserLoginSerializer
     else
-      #render json: @user.errors, status: :unprocessable_entity
-      render json: @profile.errors, status: :unprocessable_entity
+      # if !@user.valid?
+        render json: @user.errors, status: :unprocessable_entity
+      # else
+      #   render json: @profile.errors, status: :unprocessable_entity
+
+      # render json: @user.errors, status: :unprocessable_entity
+      # render json: @profile.errors, status: :unprocessable_entity
     end
   end
+
+
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_one :profile, inverse_of: :user
+  has_one :profile, inverse_of: :user, autosave: true
   has_many :messages, inverse_of: :user
 
   has_secure_password
@@ -34,5 +34,19 @@ class User < ActiveRecord::Base
   def set_token
     self.token = SecureRandom.hex
   end
+
+  # validate do |user|
+  #   # school.students.each do |student|
+  #   #   next if student.valid?
+  #   #   student.errors.full_messages.each do |msg|
+  #   #     # you can customize the error message here:
+  #   #     errors.add_to_base("Student Error: #{msg}")
+  #   #   end
+  #   # end
+  #   next if user.valid?
+  #   user.profile.errors.full_messages.each do |msg|
+  #     errors[:base] << "Profile Error: #{msg}"
+  #   end
+  # end
 
 end
