@@ -18,8 +18,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users
-  # GET /users.json
+  # show everything about a user - should I do index or show?
   def index
     # @users = User.all
 

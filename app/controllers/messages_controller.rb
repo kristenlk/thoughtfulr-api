@@ -1,5 +1,14 @@
 class MessagesController < ApplicationController
 
+  # attr_reader :@client
+
+  def initialize
+  end
+
+  # send a message
+
+
+# create a message
   def create
     message = current_user.messages.build(message_params)
     if message.save
@@ -10,18 +19,23 @@ class MessagesController < ApplicationController
     end
   end
 
+# delete a message you've sent
   def delete
 
   end
 
-
+# list all the messages you've sent
   def list
 
   end
 
+# edit a message you've sent
   def edit
 
   end
+
+
+
 
   def message_params
     params.require(:message).permit(:body)
