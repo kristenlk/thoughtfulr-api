@@ -30,6 +30,13 @@ gem 'pry', '~> 0.10.1'
 
 gem 'twilio-ruby', '~> 3.12'
 
+gem 'delayed_job_active_record'
+
+gem 'daemons'
+
+# To specify specific time of day to send out text through Twilio
+gem 'clockwork'
+
 group :development, :test do
   gem 'byebug'
   gem 'hirb'

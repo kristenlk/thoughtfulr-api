@@ -18,4 +18,6 @@ class Profile < ActiveRecord::Base
   validates :selected_time, presence: true,
             :inclusion  => { :in => [ 'morning', 'afternoon', 'evening' ],
             :message    => "%{value} is not a valid selection." }
+
+
 end
