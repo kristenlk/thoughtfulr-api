@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_one :profile, inverse_of: :user, autosave: true
   has_many :messages, inverse_of: :user
-  has_many :received_messages, through: :messages
+  has_many :received_messages, inverse_of: :user
+  has_many :received_message_bodies, through: :received_messages, source: :message
 
   has_secure_password
 
@@ -34,6 +35,14 @@ class User < ActiveRecord::Base
 
   def set_token
     self.token = SecureRandom.hex
+  end
+
+  def sent_msg_count
+    @current_user.messages.count
+  end
+
+  def received_msg_count
+    @current_user.received_messages.count
   end
 
   # validate do |user|

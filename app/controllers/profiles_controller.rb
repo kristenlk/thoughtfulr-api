@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 # show number of received messages / number of sent messages / moniker / location / time of day / phone or email / phone / opt in or opt out
 
   def show
-    render json: Profile.find(profile_params[:id])
+    render json: Profile.find(params[:id])
   end
 
 

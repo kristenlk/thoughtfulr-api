@@ -34,6 +34,8 @@ gem 'delayed_job_active_record'
 
 gem 'daemons'
 
+gem 'pry-rails'
+
 # To specify specific time of day to send out text through Twilio
 gem 'clockwork'
 

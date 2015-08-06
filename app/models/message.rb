@@ -14,14 +14,6 @@ class Message < ActiveRecord::Base
     end
   end
 
-# where should this go?
-
-  # increments received message count (will be listed on settings page and will be part of what dictates whether or not a user can receive a new message)
-  def increased_rcvd_msg_count
-    @current_user.profile.number_of_received_messages += 1
-  end
-
-
 
   # Find Message where the user_id of the person who sent it is NOT the current user. In ReceivedMessage, if the message_id of the selected Message is equal to the current_user, next.
 

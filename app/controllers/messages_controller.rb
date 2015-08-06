@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
 
   end
 
-# list all the messages you've sent
+# show all sent messages
   def list
 
   end
@@ -34,12 +34,23 @@ class MessagesController < ApplicationController
 
   end
 
+# show all received messages
+
+  def received_messages
+    render json: current_user.received_message_bodies
+  end
+
+# show all sent messages
+  def sent_messages
+    render json: current_user.messages
+  end
 
 
 
   def message_params
     params.require(:message).permit(:body)
   end
+
 end
 
 # rails puts anything after the question mark in the URL and anything in the request body and any place you put in show/[:id] all end up in the params hash - to be used in my actions

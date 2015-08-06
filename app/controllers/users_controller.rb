@@ -18,22 +18,14 @@ class UsersController < ApplicationController
     end
   end
 
-  # show everything about a user - should I do index or show?
-  def index
-    # @users = User.all
 
-    # render json: @users
-  end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
-    # render json: @user
+    render json: User.find(params[:id])
   end
 
-  # POST /users
-  # POST /users.json
-  # should be able to go to localhost:3000/users/create
+
+
   def create
     @user = User.new(register_params)
     @user.profile = Profile.new(profile_params)
