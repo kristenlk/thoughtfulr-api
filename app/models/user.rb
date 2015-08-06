@@ -37,13 +37,10 @@ class User < ActiveRecord::Base
     self.token = SecureRandom.hex
   end
 
-  def sent_msg_count
-    @current_user.messages.count
-  end
 
-  def received_msg_count
-    @current_user.received_messages.count
-  end
+
+
+  # find random user
 
   # validate do |user|
   #   # school.students.each do |student|

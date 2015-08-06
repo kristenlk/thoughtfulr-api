@@ -40,6 +40,42 @@ class Message < ActiveRecord::Base
 # end
 
 
+####
+  # send message prep: is A JOB itself
+  # find all users who are opted in. for each user, *send message*. i have a job that runs that queues other jobs.
+
+
+  # to do: replace with activerecord
+  def self.send_todays_messages
+    users = User.find_by_sql("
+      SELECT u.id, p.email_or_phone, p.phone_number
+      FROM users u
+      INNER JOIN profiles p
+         ON u.id = p.user_id
+      WHERE
+        (SELECT count(*)
+         FROM received_messages r
+         WHERE r.user_id = u.id)
+        <
+        (SELECT count(*)
+         FROM messages m
+         WHERE m.user_id = u.id)
+        AND
+         p.opted_in = 't'
+      ")
+
+    users.each do |user|
+      if
+    end
+
+  end
+
+# SELECT u.id, p.email_or_phone, p.phone_number FROM users u, profiles p INNER JOIN profiles p ON u.id = p.user_id WHERE (SELECT count(*) FROM received_messages r WHERE r.user_id = u.id) < (SELECT count(*) FROM messages m WHERE m.user_id = u.id) AND p.opted_in = 't'
+
+####
+
+####
+  # dictates when to send the message
   def when_to_send
     if User.find(1).profile.selected_time == 'morning'
       '18:02'
@@ -49,10 +85,34 @@ class Message < ActiveRecord::Base
       '17:59'
     end
   end
+####
+
+
+####
+  # find random message: self.findRandomMessage
+####
+
+
+####
+  # Only send message if user has sent more messages than they have received messages
+  ######   these methods are instance methods, so I don't need to do @current_user.messages.count
+
+  def sent_msg_count
+    messages.count
+  end
+
+  def received_msg_count
+    received_messages.count
+  end
+
+####
+  # in activerecord: later on, look at memoizing the count of something. if you add something, ups the count, etc.
+#######
 
 
 
-  def send_message
+
+  def send_message(user, message)
 
     logger.debug 'About to send message...'
 
@@ -62,8 +122,9 @@ class Message < ActiveRecord::Base
     @twilio_number = ENV['TWILIO_NUMBER']
 
     body = self.body
+    phone = user.profile.phone
 
-    @message = @client.account.messages.create({ :to => '+12039066039',
+    @message = @client.account.messages.create({ :to => phone,
                                                  :from => @twilio_number,
                                                  :body => body })
 
