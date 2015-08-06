@@ -1,6 +1,12 @@
 class Profile < ActiveRecord::Base
   belongs_to :user, inverse_of: :profile
 
+  after_initialize :set_default_values
+
+  def set_default_values
+    self.opted_in = true
+  end
+
   # validates_presence_of :moniker, :location, :email_or_phone, :selected_time
 
   validates :location, presence: true
@@ -19,5 +25,5 @@ class Profile < ActiveRecord::Base
             :inclusion  => { :in => [ 'morning', 'afternoon', 'evening' ],
             :message    => "%{value} is not a valid selection." }
 
-
+  validates :opted_in, presence: true
 end

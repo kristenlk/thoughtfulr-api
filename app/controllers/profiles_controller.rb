@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
 # edit moniker / location / time of day / phone or email / phone / opt in or opt out
 
   def profile_params
-    params.require(:profile).permit(:moniker, :location, :email_or_phone, :selected_time)
+    params.require(:profile).permit(:moniker, :location, :opted_in, :email_or_phone, :selected_time)
   end
 
 end

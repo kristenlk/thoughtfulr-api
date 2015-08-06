@@ -30,8 +30,13 @@ class MessagesController < ApplicationController
   end
 
 # edit a message you've sent
-  def edit
-
+  def update
+    sent_message = Message.find(params[:id])
+    if sent_message.update(message_params)
+      render json: sent_message
+    else
+      render json: sent_message.errors, status: :unprocessable_entity
+    end
   end
 
 # show all received messages

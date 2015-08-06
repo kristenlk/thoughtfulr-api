@@ -21,14 +21,6 @@ class ReceivedMessagesController < ApplicationController
   # end
 
 
-
-# list all the messages you've received
-# def show
-#   render json: ReceivedMessage.where(user_id: @current_user.id)
-# end
-
-
-
   def received_message_params
     params.require(:received_messages).permit(:user_id, :message_id)
   end
