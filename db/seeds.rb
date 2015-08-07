@@ -17,9 +17,9 @@
 end
 
 # Create profiles
-kristen_profile = Profile.create!(moniker: "KLK", location: "Boston, MA", email_or_phone: "phone", phone_number: 1234567890, selected_time: "evening")
-ken_profile = Profile.create!(moniker: "kpk", location: "Cambridge, MA", email_or_phone: "phone", phone_number: 2222222222, selected_time: "morning")
-courtney_profile = Profile.create!(moniker: "CGA", location: "Brookline, MA", email_or_phone: "email", selected_time: "afternoon")
+kristen_profile = Profile.create!(moniker: "KLK", location: "Boston, MA", email_or_phone: "phone", phone_number: 2039066039, selected_time: "evening")
+ken_profile = Profile.create!(moniker: "kpk", location: "Cambridge, MA", email_or_phone: "phone", phone_number: 2039066039, selected_time: "morning")
+courtney_profile = Profile.create!(moniker: "CGA", location: "Brookline, MA", email_or_phone: "phone", phone_number: 2039066039, selected_time: "afternoon")
 
 # Create messages
 Message.create!(body: 'Today\'s a great day!', user_id: 1)
@@ -27,5 +27,5 @@ Message.create!(body: 'The future belongs to those who believe in the beauty of 
 Message.create!(body: 'In Welsh folklore, corgis were the preferred method of transportation for fairies.', user_id: 3)
 
 # Create received messages
-ReceivedMessage.create!(user_id: 1, message_id: 1)
-ReceivedMessage.create!(user_id: 2, message_id: 2)
+# ReceivedMessage.create!(user_id: 1, message_id: 1)
+# ReceivedMessage.create!(user_id: 2, message_id: 2)

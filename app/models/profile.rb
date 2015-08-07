@@ -26,4 +26,10 @@ class Profile < ActiveRecord::Base
             :message    => "%{value} is not a valid selection." }
 
   validates :opted_in, presence: true
+
+    # checks if the user selected to be notified by phone or email. only run send_message if a user selected 'phone'. run different action if user selected 'email'.
+  def phone?
+    email_or_phone == 'phone'
+  end
+
 end
