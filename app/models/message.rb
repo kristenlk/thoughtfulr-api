@@ -59,7 +59,7 @@ class Message < ActiveRecord::Base
 ####
   # dictates when to send the message - called in handle_asynchronously
   def when_to_send(user)
-    '24:00'
+    '14:44'
     # if user.profile.selected_time == 'morning'
     #   '13:00'
     # elsif user.profile.selected_time == 'afternoon'
@@ -78,9 +78,9 @@ class Message < ActiveRecord::Base
 
     @twilio_number = ENV['TWILIO_NUMBER']
 
-    @message = @client.account.messages.create({ :to =>  5087454468, #user.profile.phone_number,
+    @message = @client.account.messages.create({ :to =>  2039066039, #user.profile.phone_number,
                                                  :from => @twilio_number,
-                                                 :body => self.body })
+                                                 :body => "#{self.body} -Sent to you by #{self.user.profile.moniker} in #{self.user.profile.location}" })
 
 
     logger.debug 'Message sent!'

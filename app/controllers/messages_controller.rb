@@ -20,8 +20,10 @@ class MessagesController < ApplicationController
   end
 
 # delete a message you've sent
-  def delete
-
+  def destroy
+    message = Message.find(params[:id])
+    message.destroy!
+    head :ok
   end
 
 # show all sent messages
