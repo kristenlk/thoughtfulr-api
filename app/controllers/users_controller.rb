@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:moniker, :location, :email_or_phone, :selected_time)
+    params.require(:profile).permit(:moniker, :location, :email_or_phone, :selected_time, :phone_number)
   end
 
   def register_params
