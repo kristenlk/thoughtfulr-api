@@ -53,13 +53,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    # @user = User.find(params[:id])
 
-    # if @user.update(user_params)
-    #   head :no_content
-    # else
-    #   render json: @user.errors, status: :unprocessable_entity
-    # end
+    @user = User.find(params[:id])
+    @user.profile = Profile.find(params[:id])
+
+    if @user.update(register_params)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   # DELETE /users/1
@@ -72,6 +74,7 @@ class UsersController < ApplicationController
 
   private
 
+  # rename these!
   def login_params
     params.require(:credentials).permit(:email, :password)
   end
