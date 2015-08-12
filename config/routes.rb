@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
   post '/login' => 'users#login'
-  post '/create' => 'users#create'
+  # post '/create' => 'users#create'
   # resources :received_messages, except: [:new, :edit]
   resources :users, except: [:new, :edit]
   resources :messages, except: [:new, :edit]
   resources :profiles, except: [:new, :edit]
   get 'users/:id/profile', to: 'profiles#show'
+  patch 'users/:id/profile', to: 'profiles#update'
   get '/received_messages', to: 'messages#received_messages'
   get '/sent_messages', to: 'messages#sent_messages'
   # The priority is based upon order of creation: first created -> highest priority.

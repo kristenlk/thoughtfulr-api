@@ -6,6 +6,14 @@ class ProfilesController < ApplicationController
     render json: Profile.find(params[:id])
   end
 
+  def update
+    profile = Profile.find(params[:id])
+    if profile.update(profile_params)
+      render json: profile
+    else
+      render json: profile.errors, status: :unprocessable_entity
+    end
+  end
 
 # edit moniker / location / time of day / phone or email / phone / opt in or opt out
 
