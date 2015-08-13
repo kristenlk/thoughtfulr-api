@@ -39,6 +39,9 @@ gem 'pry-rails'
 # To specify specific time of day to send out text through Twilio
 gem 'clockwork'
 
+gem 'rails_12factor'
+gem 'puma'
+
 group :development, :test do
   gem 'byebug'
   gem 'hirb'
