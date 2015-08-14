@@ -18,6 +18,9 @@ Daily messages are sent to users with the moniker and location of the user who s
 - Bootstrap
 - Handlebars
 
+#### Notes:
+- This app is a work in progress! The job handler that will send messages to users once per day is still being worked on (messages are currently only sent to users when I manually trigger them), so don't expect your daily message just yet.
+
 Link to front end: https://github.com/kristenlk/thoughtfulr-app
 
 Link to back end: https://github.com/kristenlk/thoughtfulr-api
@@ -34,4 +37,3 @@ https://moqups.com/kristenlk/5oE8EUue
 - As a user, I want to select the moniker and location that appear on the messages I send.
 
 Created for Project 2 in General Assembly Boston's Web Development Immersive course.
-
