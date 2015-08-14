@@ -2,6 +2,8 @@ class Message < ActiveRecord::Base
   belongs_to :user, inverse_of: :messages
   has_many :received_messages, inverse_of: :message
 
+  validates :body, presence: true
+
   # Find Message where the user_id of the person who sent it is NOT the current user. In ReceivedMessage, if the message_id of the selected Message is equal to the current_user, next.
 
   # should this be a class or instance method? where should this be called?
@@ -78,7 +80,7 @@ class Message < ActiveRecord::Base
 
     @twilio_number = ENV['TWILIO_NUMBER']
 
-    @message = @client.account.messages.create({ :to =>  2039066039, #user.profile.phone_number,
+    @message = @client.account.messages.create({ :to =>  user.profile.phone_number,#2039066039,
                                                  :from => @twilio_number,
                                                  :body => "#{self.body} -Sent to you by #{self.user.profile.moniker} in #{self.user.profile.location}" })
 
