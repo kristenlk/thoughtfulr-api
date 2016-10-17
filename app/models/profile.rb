@@ -14,18 +14,22 @@ class Profile < ActiveRecord::Base
   validates :moniker, presence: true,
             length: { minimum: 1, maximum: 10 }
 
-  validates :email_or_phone, presence: true,
-            :inclusion  => { :in => [ 'email', 'phone' ],
-            :message    => "%{value} is not a valid selection." }
+  validates :email_or_phone,
+            inclusion: {
+              in: [ 'email', 'phone' ],
+              message: "%{value} is not a valid selection."
+            }
 
   validates :phone_number, presence: true,
             if: Proc.new { |profile| profile.email_or_phone == 'phone' }
 
   validates :selected_time, presence: true,
-            :inclusion  => { :in => [ 'morning', 'afternoon', 'evening' ],
-            :message    => "%{value} is not a valid selection." }
+            inclusion: {
+              :in => [ 'morning', 'afternoon', 'evening' ],
+              message: "%{value} is not a valid selection."
+            }
 
-  validates :opted_in, presence: true
+  validates_inclusion_of :opted_in, in: [ true, false ]
 
     # checks if the user selected to be notified by phone or email. only run send_message if a user selected 'phone'. run different action if user selected 'email'.
   def phone?
