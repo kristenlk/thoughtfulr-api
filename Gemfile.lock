@@ -54,6 +54,9 @@ GEM
     delayed_job_active_record (4.0.3)
       activerecord (>= 3.0, < 5.0)
       delayed_job (>= 3.0, < 4.1)
+    delayed_job_recurring (0.3.5)
+      delayed_job (>= 3.0)
+      delayed_job_active_record
     dotenv (2.0.2)
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
@@ -148,6 +151,7 @@ DEPENDENCIES
   clockwork
   daemons
   delayed_job_active_record
+  delayed_job_recurring
   dotenv-rails
   hirb
   pg
