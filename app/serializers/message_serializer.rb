@@ -6,7 +6,6 @@ class MessageSerializer < ActiveModel::Serializer
   end
 
   def created_at
-    object.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('on %B %d, %Y at %l:%M %p Eastern time')
+    object.created_at.in_time_zone('Eastern Time (US & Canada)').strftime('on %B %d, %Y at %l:%M %p Eastern Time')
   end
-
 end
