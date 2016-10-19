@@ -33,7 +33,7 @@ class SendMessageJob
         AND
           p.opted_in = 't'
         AND
-          p.selected_time = #{time}
+          p.selected_time = 'afternoon';
       "
     )
   end
