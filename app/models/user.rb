@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   has_secure_password
 
   before_create :set_token
-  # When I call create, before it actually saves the object, the set_token method will be invoked. Which means the token will have been set.
 
   validates :email, presence: true,
                     uniqueness: true,
@@ -25,7 +24,6 @@ class User < ActiveRecord::Base
     user = find_by email: email
     user.login password if user
   end
-  # this allows me to type User.login in rails c
 
   def login(password)
     authenticate(password) && set_token && save! && token
@@ -36,24 +34,4 @@ class User < ActiveRecord::Base
   def set_token
     self.token = SecureRandom.hex
   end
-
-
-
-
-  # find random user
-
-  # validate do |user|
-  #   # school.students.each do |student|
-  #   #   next if student.valid?
-  #   #   student.errors.full_messages.each do |msg|
-  #   #     # you can customize the error message here:
-  #   #     errors.add_to_base("Student Error: #{msg}")
-  #   #   end
-  #   # end
-  #   next if user.valid?
-  #   user.profile.errors.full_messages.each do |msg|
-  #     errors[:base] << "Profile Error: #{msg}"
-  #   end
-  # end
-
 end

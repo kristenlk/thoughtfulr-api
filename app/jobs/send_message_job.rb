@@ -31,9 +31,9 @@ class SendMessageJob
           FROM messages m
           WHERE m.user_id = u.id)
         AND
-          p.opted_in = 't'
+          p.opted_in = TRUE
         AND
-          p.selected_time = 'afternoon';
+          p.selected_time = ''#{time}'';
       "
     )
   end
@@ -46,8 +46,8 @@ class SendMessageJob
   end
 
   def time
-    return "morning" if Time.now.strftime("%l").to_i == 9
-    return "afternoon" if Time.now.strftime("%l").to_i == 2
-    return "evening" if Time.now.strftime("%l").to_i == 7
+    return 'morning' if Time.now.strftime("%l").to_i == 9
+    return 'afternoon' if Time.now.strftime("%l").to_i == 2
+    return 'evening' if Time.now.strftime("%l").to_i == 7
   end
 end

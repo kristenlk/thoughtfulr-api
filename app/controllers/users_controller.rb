@@ -1,16 +1,11 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate, only: [:login, :create]
-  # below was set up by scaffold
-  # before_action :set_user, only: [:show, :update, :destroy]
 
-
-  # POST /login
   def login
-    # credentials = user_credentials
     credentials = login_params
-    # user = User.find_by email: credentials[:email]
+
     token = User.login(credentials[:email], credentials[:password])
-    # if User.login works, there will be a token. If there is a token, render the token as json. If there is not, you're unauthorized.
+
     if token
       render json: User.find_by(token: token), serializer: UserLoginSerializer
     else
@@ -18,42 +13,22 @@ class UsersController < ApplicationController
     end
   end
 
-
-
   def show
     render json: User.find(params[:id])
   end
 
-
-
   def create
     @user = User.new(register_params)
     @user.profile = Profile.new(profile_params)
-    #@user.profile.build(profile_params)
-    # @user.profile = @profile
-    # credentials = login_params
-    # token = User.login(credentials[:email], credentials[:password])
-    if @user.save # && @profile.save # && token
-      #render json: @user, status: :created, location: @user
-      render json: @user, status: :created, serializer: UserLoginSerializer
-      #render json: User.find_by(token: token), serializer: UserLoginSerializer
-    else
-      # if !@user.valid?
-        render json: @user.errors, status: :unprocessable_entity
-      # else
-      #   render json: @profile.errors, status: :unprocessable_entity
 
-      # render json: @user.errors, status: :unprocessable_entity
-      # render json: @profile.errors, status: :unprocessable_entity
+    if @user.save
+      render json: @user, status: :created, serializer: UserLoginSerializer
+    else
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
-
-
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
-
     @user = User.find(params[:id])
     @user.profile = Profile.find(params[:id])
 
@@ -64,8 +39,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     # @user.destroy
 
@@ -74,7 +47,6 @@ class UsersController < ApplicationController
 
   private
 
-  # rename these!
   def login_params
     params.require(:credentials).permit(:email, :password)
   end
@@ -86,15 +58,4 @@ class UsersController < ApplicationController
   def register_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
-    # def user_credentials
-    #   params.require(:credentials).permit(:email, :password, :password_confirmation)
-    # end
-
-    # def set_user
-    #   @user = User.find(params[:id])
-    # end
-
-    # def user_params
-    #   params.require(:user).permit(:email, :password, :password_confirmation)
-    # end
 end

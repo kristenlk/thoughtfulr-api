@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20150806050506) do
   create_table "profiles", force: :cascade do |t|
     t.text     "moniker",                     null: false
     t.text     "location",                    null: false
-    t.text     "email_or_phone",              null: false
     t.text     "phone_number"
     t.integer  "number_of_sent_messages"
     t.integer  "number_of_received_messages"
@@ -53,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150806050506) do
     t.datetime "updated_at",                  null: false
     t.integer  "user_id"
     t.boolean  "opted_in"
+    t.text     "email_or_phone",              null: false
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
